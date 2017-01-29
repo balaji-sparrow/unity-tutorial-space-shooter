@@ -370,6 +370,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroid: {fileID: 1534602218764420, guid: b0180ffeda732491da78ffa53801766b, type: 2}
   spawnValues: {x: 6, y: 0, z: 16}
+  asteroidCount: 10
+  startWait: 1
+  spawnWait: 0.5
+  waveWait: 4
 --- !u!4 &712961624
 Transform:
   m_ObjectHideFlags: 0

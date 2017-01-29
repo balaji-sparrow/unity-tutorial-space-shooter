@@ -6,17 +6,31 @@ public class GameController : MonoBehaviour
 {
 	public GameObject asteroid;
 	public Vector3 spawnValues;
+	public int asteroidCount;
+	public float startWait;
+	public float spawnWait;
+	public float waveWait;
 
 	void Start()
 	{
-		SpawnWaves();
+		StartCoroutine(SpawnWaves());
 	}
 
-	void SpawnWaves()
+	IEnumerator SpawnWaves()
 	{
-		Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-		Quaternion spawnRotation = Quaternion.identity;
+		yield return new WaitForSeconds(startWait);
 
-		Instantiate(asteroid, spawnPosition, spawnRotation);
+		while(true) {
+			for (int i = 0; i < asteroidCount; i++) {
+				Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+				Quaternion spawnRotation = Quaternion.identity;
+
+				Instantiate(asteroid, spawnPosition, spawnRotation);
+
+				yield return new WaitForSeconds(spawnWait);
+			}
+
+			yield return new WaitForSeconds(waveWait);
+		}
 	}
 }
