@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+	public float fireRate = 0.5F;
 	public float speed;
 	public float tilt;
 	public Boundary boundary;
+	public GameObject shot;
+	public Transform shotSpawn;
 
+	private float myTime = 0.0F;
+	private float nextFire = 0.5F;
 	private Rigidbody rb;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
+	}
+
+	void Update()
+	{
+		myTime = myTime + Time.deltaTime;
+
+		if (Input.GetButton("Fire1") && myTime > nextFire) {
+			nextFire = myTime + fireRate;
+			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+
+			nextFire = nextFire - myTime;
+			myTime = 0.0F;
+		}
 	}
 
 	void FixedUpdate()
