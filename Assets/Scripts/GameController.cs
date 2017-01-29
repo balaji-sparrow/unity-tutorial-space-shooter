@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-	public GameObject asteroid;
+	public GameObject[] asteroids;
 	public Vector3 spawnValues;
 	public int asteroidCount;
 	public float startWait;
@@ -48,6 +48,8 @@ public class GameController : MonoBehaviour
 
 		while(true) {
 			for (int i = 0; i < asteroidCount; i++) {
+				GameObject asteroid = asteroids[Random.Range(0, asteroids.Length)];
+
 				Vector3 spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Quaternion spawnRotation = Quaternion.identity;
 
